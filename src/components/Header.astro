@@ -1,0 +1,26 @@
+---
+import { Icon } from 'astro-icon'
+import site from '../data/site.json'
+
+export type Link = {
+  href: string
+  text: string
+}
+---
+
+<header class="container">
+  <div>
+    <a href="/" title="Home">
+      <Icon name="logo" size={48} aria-hidden="true" />
+      <h1>{site.title}</h1>
+    </a>
+  </div>
+</header>
+
+<style>
+  a {
+    display: flex;
+    align-items: center;
+    gap: 1.5ch;
+  }
+</style>
