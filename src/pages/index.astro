@@ -1,6 +1,12 @@
 ---
 import { getCollection } from 'astro:content'
+import Card from '../components/Card.astro'
 import Layout from '../layouts/Base.astro'
+import type { Entry } from '../content/config'
+
+function sortEntry(a: Entry, b: Entry) {
+	return b.data.date.getTime() - a.data.date.getTime()
+}
 
 const entries = await Promise.all([
 	getCollection('articles'),
@@ -8,7 +14,7 @@ const entries = await Promise.all([
 	getCollection('likes'),
 	getCollection('notes'),
 	getCollection('rsvp')
-]).then(all => all.flat())
+]).then(all => all.flat().sort(sortEntry))
 
 function toString(entry: typeof entries[number]) {
 	if ('title' in entry.data) {
@@ -26,7 +32,7 @@ function toString(entry: typeof entries[number]) {
 	<ul>
 		{entries.map((entry) => (
 			<li>
-				<a href={`/${entry.collection}/${entry.slug}/`}>{toString(entry)}</a>	
+				<Card entry={entry} />
 			</li>
 		))}
 	</ul>
@@ -34,9 +40,12 @@ function toString(entry: typeof entries[number]) {
 
 <style>
 	ul {
+		list-style: none;
 		display: flex;
 		flex-direction: column;
 		gap: 0.875em;
 		padding: 0 1em;
+		max-width: 40ch;
+		margin: 0 auto;
 	}
 </style>

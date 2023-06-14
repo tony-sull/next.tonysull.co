@@ -1,0 +1,79 @@
+---
+import type { Entry } from "../content/config";
+import { isoDate, shortDate } from "../utils/dates";
+
+export type Props = {
+    entry: Entry;
+};
+
+const { entry } = Astro.props;
+
+const { date, 'post-status': postStatus, tags } = entry.data;
+
+const { Content } = await entry.render()
+---
+
+<article class="h-entry">
+    <header class="h-card">
+        {
+            date && postStatus !== 'draft' && (
+                <small>
+                    <time datetime={isoDate(date!)} class="dt-published">
+                        {shortDate(date!)}
+                    </time>
+                </small>
+            )
+        }
+        {
+            postStatus === 'draft' && (
+                <small>DRAFT</small>
+            )
+        }
+        {tags?.length && (
+            <ul>
+                {tags.map((tag) => (
+                    <li>{tag}</li>
+                ))}
+            </ul>
+        )}
+    </header>
+
+    <div class="e-content">
+        <Content />
+    </div>
+</article>
+
+<style>
+    article {
+        border: 1px solid currentColor;
+        border-radius: 0.25em;
+        padding: 0.5em;
+    }
+
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    header small:not(:has(time)) {
+        color: red;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5em;
+        margin-block-start: 0.25em;
+    }
+
+    li {
+        border: 1px solid currentColor;
+        font-size: 0.75em;
+        padding: .125em .5em;
+        border-radius: 9999px;
+    }
+</style>
