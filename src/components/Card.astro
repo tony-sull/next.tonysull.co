@@ -39,7 +39,9 @@ const { Content } = await entry.render()
     </header>
 
     <div class="e-content">
-        <Content />
+        <a href={`/${entry.collection}/${entry.slug}/`}>
+            <Content />
+        </a>
     </div>
 </article>
 
