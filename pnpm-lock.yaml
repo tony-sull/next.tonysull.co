@@ -1,6 +1,9 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  '@fontsource/comic-neue':
+    specifier: ^5.0.3
+    version: 5.0.3
   astro:
     specifier: ^2.5.6
     version: 2.5.6(sharp@0.32.1)
@@ -540,6 +543,10 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /@fontsource/comic-neue@5.0.3:
+    resolution: {integrity: sha512-bqMxVcF9HxKXWiIwsr3cwMRqQMW6fwhVH4lx53H5Ai2DFquJVQr+pQHP8yvkdKZyDWJ6wKSakUqMHLriwXTeKw==}
+    dev: false
 
   /@jridgewell/gen-mapping@0.3.3:
     resolution: {integrity: sha512-HLhSWOLRi875zjjMG/r+Nv0oCW8umGb0BgEhyX3dDX3egwZtB8PqLnjz3yedt8R5StBrzcg4aBpnh8UA9D1BoQ==}
