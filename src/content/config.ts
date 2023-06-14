@@ -16,7 +16,7 @@ export function noteSchema() {
 
 export function articleSchema() {
     return baseSchema.extend({
-        name: z.string()
+        title: z.string()
     })
 }
 
