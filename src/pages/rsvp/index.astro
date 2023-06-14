@@ -1,0 +1,17 @@
+---
+import Layout from '../../layouts/Base.astro'
+import { getCollection } from 'astro:content'
+
+const entries = await getCollection('rsvp')
+---
+
+<Layout title="RSVP">
+    <h1>RSVP</h1>
+    <ul>
+        {entries.map((entry) => (
+            <li>
+                <a href={`/rsvp/${entry.slug}/`}>{entry.slug}</a>
+            </li>
+        ))}
+    </ul>
+</Layout>

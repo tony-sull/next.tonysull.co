@@ -1,0 +1,17 @@
+---
+import Layout from '../../layouts/Base.astro'
+import { getCollection } from 'astro:content'
+
+const entries = await getCollection('bookmarks')
+---
+
+<Layout title="Bookmarks">
+    <h1>Bookmarks</h1>
+    <ul>
+        {entries.map((entry) => (
+            <li>
+                <a href={`/bookmarks/${entry.slug}/`}>{entry.slug}</a>
+            </li>
+        ))}
+    </ul>
+</Layout>

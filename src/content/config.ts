@@ -2,7 +2,10 @@ import { z } from 'astro/zod'
 import { defineCollection } from 'astro:content'
 
 const baseSchema = z.object({
-    category: z.array(z.string()).optional()
+    category: z.array(z.string()).optional(),
+    date: z.date({ coerce: true }),
+    'post-status': z.enum(['published', 'draft']).optional(),
+    visibility: z.enum(['public', 'unlisted', 'private']).optional()
 })
 
 export function noteSchema() {
