@@ -1,6 +1,9 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  '@fontsource/comic-mono':
+    specifier: ^5.0.3
+    version: 5.0.3
   '@fontsource/comic-neue':
     specifier: ^5.0.3
     version: 5.0.3
@@ -543,6 +546,10 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /@fontsource/comic-mono@5.0.3:
+    resolution: {integrity: sha512-gItMQl5fSxDDTwhMwAiRaBh72CjPQ9Nt9G7kK4wM99rJh/oZYZ3ONQT9yD95MYFxWmsWxhLTuvYMjXN3zwTb0w==}
+    dev: false
 
   /@fontsource/comic-neue@5.0.3:
     resolution: {integrity: sha512-bqMxVcF9HxKXWiIwsr3cwMRqQMW6fwhVH4lx53H5Ai2DFquJVQr+pQHP8yvkdKZyDWJ6wKSakUqMHLriwXTeKw==}
