@@ -1,16 +1,24 @@
 ---
-import '@fontsource/comic-neue'
-import Footer from '../components/Footer.astro'
-import Head, { type Props as HeadProps } from '../components/Head.astro'
-import Header from '../components/Header.astro'
+import "@fontsource/comic-neue";
+import fontUrl from "@fontsource/comic-neue/files/comic-neue-latin-400-normal.woff2";
+import Footer from "../components/Footer.astro";
+import Head, { type Props as HeadProps } from "../components/Head.astro";
+import Header from "../components/Header.astro";
 
-export type Props = HeadProps
+export type Props = HeadProps;
 
-const { ...head } = Astro.props
+const { ...head } = Astro.props;
 ---
 
 <html lang="en" data-theme="light">
   <head>
+    <link
+      rel="preload"
+      href={fontUrl}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <Head {...head} />
   </head>
 
@@ -22,47 +30,45 @@ const { ...head } = Astro.props
     </main>
 
     <Footer />
-  </body>
+  </body><style>
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100dvh;
+      align-items: center;
+      font-family: "Comic Neue";
+      font-size: clamp(1rem, calc(0.91rem + 0.43vw), 1.25rem);
+    }
+
+    body > :global(*:not(main)) {
+      width: 100%;
+      max-width: 100ch;
+    }
+
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 80ch;
+    }
+  </style>
+
+  <style is:global>
+    .sr-only {
+      border: 0;
+      padding: 0;
+      margin: 0;
+      position: absolute !important;
+      height: 1px;
+      width: 1px;
+      overflow: hidden;
+      /* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
+      clip: rect(1px 1px 1px 1px);
+      /* maybe deprecated but we need to support legacy browsers */
+      clip: rect(1px, 1px, 1px, 1px);
+      /* modern browsers, clip-path works inwards from each corner */
+      clip-path: inset(50%);
+      /* added line to stop words getting smushed together (as they go onto seperate lines and some screen readers do not understand line feeds as a space */
+      white-space: nowrap;
+    }
+  </style>
 </html>
-
-<style>
-  body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100dvh;
-    align-items: center;
-    font-family: 'Comic Neue';
-    font-size: clamp(1.00rem, calc(0.91rem + 0.43vw), 1.25rem);
-  }
-
-  body > :global(*:not(main)) {
-    width: 100%;
-    max-width: 100ch;
-  }
-
-  main {
-    flex: 1;
-    width: 100%;
-    max-width: 80ch;
-  }
-</style>
-
-<style is:global>
-  .sr-only {
-    border: 0;
-    padding: 0;
-    margin: 0;
-    position: absolute !important;
-    height: 1px;
-    width: 1px;
-    overflow: hidden;
-    /* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
-    clip: rect(1px 1px 1px 1px);
-    /* maybe deprecated but we need to support legacy browsers */
-    clip: rect(1px, 1px, 1px, 1px);
-    /* modern browsers, clip-path works inwards from each corner */
-    clip-path: inset(50%);
-    /* added line to stop words getting smushed together (as they go onto seperate lines and some screen readers do not understand line feeds as a space */
-    white-space: nowrap;
-  }
-</style>
