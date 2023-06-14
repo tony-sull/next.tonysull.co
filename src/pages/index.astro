@@ -1,7 +1,42 @@
 ---
+import { getCollection } from 'astro:content'
 import Layout from '../layouts/Base.astro'
+
+const entries = await Promise.all([
+	getCollection('articles'),
+	getCollection('bookmarks'),
+	getCollection('likes'),
+	getCollection('notes'),
+	getCollection('rsvp')
+]).then(all => all.flat())
+
+function toString(entry: typeof entries[number]) {
+	if ('title' in entry.data) {
+		return entry.data.title
+	}
+
+	const body = entry.body.replace('\n', '')
+
+	return body ? body.slice(0, 40) : `(${entry.collection}) ${entry.slug}`
+}
 ---
 
 <Layout>
-	<h1>Welcome back, Astronaut!</h1>
+	<h1>Latest posts</h1>
+	<ul>
+		{entries.map((entry) => (
+			<li>
+				<a href={`/${entry.collection}/${entry.slug}/`}>{toString(entry)}</a>	
+			</li>
+		))}
+	</ul>
 </Layout>
+
+<style>
+	ul {
+		display: flex;
+		flex-direction: column;
+		gap: 0.875em;
+		padding: 0 1em;
+	}
+</style>

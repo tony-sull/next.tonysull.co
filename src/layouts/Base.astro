@@ -23,3 +23,23 @@ const { ...head } = Astro.props
     <Footer />
   </body>
 </html>
+
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    align-items: center;
+  }
+
+  body > :global(*:not(main)) {
+    width: 100%;
+    max-width: 100ch;
+  }
+
+  main {
+    flex: 1;
+    width: 100%;
+    max-width: 80ch;
+  }
+</style>
